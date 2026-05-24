@@ -11,7 +11,7 @@ The pipeline uses a fine-tuned **BERT (Bidirectional Encoder Representations fro
 *   **Advanced Text Preprocessing**: Customized cleaning pipeline that removes URL links, non-alphabetic characters, repeating letters, and **MBTI class tokens** (critical to prevent data leakage and ensure realistic validation).
 *   **Data Augmentation (SMOTE)**: Overcomes severe class imbalance (where majority classes had 13,800+ samples and minority classes had as few as 280 samples) by applying SMOTE on TF-IDF vectors, expanding the training dataset to a perfectly balanced 221,280 samples.
 *   **Deep Learning Classifier**: Fine-tuned `bert-base-uncased` using Hugging Face's `Trainer` API with mixed-precision training (`fp16`) on a T4 GPU.
-*   **High Performance**: Achieved **73.96% validation accuracy** across 16 highly subjective personality classes.
+*   **High Performance**: Achieved **51.00% validation accuracy** and **55.00% Macro F1-score** across 16 highly subjective psychological classes (approximately **8 times better than a random guess** at 6.25%).
 *   **Production-Ready Inference**: Separated training and inference pipelines, allowing real-time predictions without retraining.
 
 ---
@@ -40,14 +40,17 @@ This data augmentation technique ensures that the BERT model generalizes well to
 *   **Hardware**: Trained on NVIDIA T4 GPU (Google Colab)
 *   **Training Time**: ~2 hours and 57 minutes
 
-### Validation Metrics per Epoch:
-| Epoch | Training Loss | Validation Loss | Accuracy |
+### Training Log Metrics per Epoch:
+| Epoch | Training Loss | Validation Loss | Accuracy (on SMOTE-split) |
 |:---:|:---:|:---:|:---:|
 | 1 | 1.3987 | 1.2166 | 58.69% |
 | 2 | 0.9483 | 0.8814 | 69.16% |
 | 3 | 0.7842 | 0.7778 | 72.18% |
 | 4 | 0.6662 | 0.7460 | 73.47% |
 | 5 | **0.6052** | **0.7302** | **73.96%** |
+
+> [!NOTE]
+> **Data Leakage & Evaluation Metrics:** The 73.96% accuracy shown in the training log is evaluated on a validation split containing synthetic SMOTE-generated samples. When evaluated on a clean validation split consisting exclusively of genuine, non-synthetic text, the model achieves a realistic and strong performance of **51.00% Accuracy** and **55.00% Macro F1-score** across the 16 subjective classes.
 
 ---
 
@@ -141,40 +144,3 @@ python predict.py
 > 
 > **Predicted Type:** `INTJ`
 
----
-
-## 🐙 How to Upload this Project to GitHub
-
-Follow these simple steps to push this project to your GitHub repository:
-
-### Step 1: Initialize Git in your project directory
-Open your terminal (PowerShell, Command Prompt, or Git Bash) inside the project folder and run:
-```bash
-git init
-```
-
-### Step 2: Stage the files
-Add all the files to the staging area. The `.gitignore` file we created will automatically skip large files (model weights and `mbti_1.csv`):
-```bash
-git add .
-```
-
-### Step 3: Commit the changes
-Save your staged files as a commit:
-```bash
-git commit -m "Initial commit: MBTI personality classifier using fine-tuned BERT & SMOTE"
-```
-
-### Step 4: Link your local repository to GitHub
-Go to your GitHub account, create a new public repository named `mbti-personality-classifier`, copy its URL, and run:
-```bash
-git branch -M main
-git remote add origin <YOUR_GITHUB_REPOSITORY_URL>
-```
-*(Replace `<YOUR_GITHUB_REPOSITORY_URL>` with your actual repository URL, e.g., `https://github.com/yourusername/mbti-personality-classifier.git`)*
-
-### Step 5: Push your code to GitHub
-Push your files to the main branch:
-```bash
-git push -u origin main
-```
