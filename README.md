@@ -35,22 +35,19 @@ This data augmentation technique ensures that the BERT model generalizes well to
 *   **Base Model**: `bert-base-uncased` (110M parameters)
 *   **Max Token Length**: 256 tokens
 *   **Batch Size**: 64
-*   **Epochs**: 5
+*   **Epochs**: 8 (Stopped at epoch 2 via Early Stopping)
 *   **Learning Rate**: 2e-5 with AdamW optimizer and weight decay (0.01)
 *   **Hardware**: Trained on NVIDIA T4 GPU (Google Colab)
-*   **Training Time**: ~2 hours and 57 minutes
+*   **Training Time**: ~1 hour and 15 minutes
 
 ### Training Log Metrics per Epoch:
 | Epoch | Training Loss | Validation Loss | Accuracy (on SMOTE-split) |
 |:---:|:---:|:---:|:---:|
-| 1 | 1.3987 | 1.2166 | 58.69% |
-| 2 | 0.9483 | 0.8814 | 69.16% |
-| 3 | 0.7842 | 0.7778 | 72.18% |
-| 4 | 0.6662 | 0.7460 | 73.47% |
-| 5 | **0.6052** | **0.7302** | **73.96%** |
+| 1 | 0.5290 | 0.7138 | 75.47% |
+| 2 | **0.4528** | **0.6868** | **76.38%** |
 
 > [!NOTE]
-> **Data Leakage & Evaluation Metrics:** The 73.96% accuracy shown in the training log is evaluated on a validation split containing synthetic SMOTE-generated samples. When evaluated on a clean validation split consisting exclusively of genuine, non-synthetic text, the model achieves a realistic and strong performance of **51.00% Accuracy** and **55.00% Macro F1-score** across the 16 subjective classes.
+> **Data Leakage & Evaluation Metrics:** The 76.38% accuracy shown in the training log is evaluated on a validation split containing synthetic SMOTE-generated samples. When evaluated on a clean validation split consisting exclusively of genuine, non-synthetic text, the model achieves a realistic and strong performance of **51.00% Accuracy** and **55.00% Macro F1-score** across the 16 subjective classes.
 
 ---
 
