@@ -1,0 +1,28 @@
+# Python environment
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Local data & datasets
+*.csv
+mbti_1.csv
+data/
+
+# Model weights & training outputs
+saved_model/
+results/
+logs/
+eval_temp/
+*.safetensors
+*.bin
+*.pth
+*.pt
+*.bin
+*.out
