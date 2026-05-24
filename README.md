@@ -40,20 +40,11 @@ This data augmentation technique ensures that the BERT model generalizes well to
 *   **Hardware**: Trained on NVIDIA T4 GPU (Google Colab)
 *   **Training Time**: ~1 hour and 15 minutes
 
-### Training Log Metrics per Epoch:
-| Epoch | Training Loss | Validation Loss | Accuracy (on SMOTE-split) |
-|:---:|:---:|:---:|:---:|
-| 1 | 0.5290 | 0.7138 | 75.47% |
-| 2 | **0.4528** | **0.6868** | **76.38%** |
-
-> [!NOTE]
-> **Data Leakage & Evaluation Metrics:** The 76.38% accuracy shown in the training log is evaluated on a validation split containing synthetic SMOTE-generated samples. When evaluated on a clean validation split consisting exclusively of genuine, non-synthetic text, the model achieves a realistic and strong performance of **51.00% Accuracy** and **55.00% Macro F1-score** across the 16 subjective classes.
-
 ---
 
 ## 📈 Model Performance & Evaluation
 
-After fine-tuning, the model was evaluated on the validation dataset (reconstructed identically using the same split random state). 
+After fine-tuning, the model was evaluated on a clean validation dataset consisting of genuine social media posts. The classifier achieves a genuine **51.00% Accuracy** and **55.00% Macro F1-score** across the 16 highly subjective classes (approximately **8 times better than a random guess** at 6.25%).
 
 ### Confusion Matrix (Heatmap)
 ![Confusion Matrix](results/confusion_matrix.png)
