@@ -6,6 +6,19 @@ The pipeline uses a fine-tuned **BERT (Bidirectional Encoder Representations fro
 
 ---
 
+## 💼 Business & Recruitment Context (The "16 Personalities" in HR)
+
+The Myers-Briggs Type Indicator (MBTI), widely known in the industry as the **16 Personalities** framework, is a popular tool used globally—especially in the USA—by HR departments and team leaders. 
+
+In corporate environments, it is applied during hiring and team assembly to:
+*   **Optimize Team Dynamics**: Align different cognitive styles to create well-rounded, high-performing teams (e.g., combining logical Analysts with empathetic Diplomats and structured Sentinels).
+*   **Reduce Workplace Conflict**: Help employees understand their colleagues' communication preferences, leading to smoother collaboration and fewer interpersonal friction points.
+*   **Role Alignment**: Ensure candidates are placed in roles that match their natural preferences (e.g., detail-oriented roles for "Sensing" (S) types, creative/strategic roles for "Intuitive" (N) types).
+
+By automating this classification using NLP, this project demonstrates how machine learning can scale HR analytics, enabling companies to analyze communication styles from text (like cover letters, writing samples, or internal communications) to support data-driven talent management.
+
+---
+
 ## 🚀 Key Features
 
 *   **Advanced Text Preprocessing**: Customized cleaning pipeline that removes URL links, non-alphabetic characters, repeating letters, and **MBTI class tokens** (critical to prevent data leakage and ensure realistic validation).
@@ -34,11 +47,11 @@ This data augmentation technique ensures that the BERT model generalizes well to
 
 *   **Base Model**: `bert-base-uncased` (110M parameters)
 *   **Max Token Length**: 256 tokens
-*   **Batch Size**: 64
-*   **Epochs**: 8 (Stopped at epoch 2 via Early Stopping)
+*   **Batch Size**: 64 (effective batch size of 32 on GPU)
+*   **Epochs**: 8 (Stopped at epoch 2.0 via Early Stopping)
 *   **Learning Rate**: 2e-5 with AdamW optimizer and weight decay (0.01)
 *   **Hardware**: Trained on NVIDIA T4 GPU (Google Colab)
-*   **Training Time**: ~1 hour and 15 minutes
+*   **Training Time**: ~1.5 hours (Early Stopped). A full 8-epoch training run would have taken ~5-6 hours, but training converged early after 9,076 steps.
 
 ---
 
